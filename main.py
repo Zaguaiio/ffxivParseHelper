@@ -16,9 +16,7 @@ def updateData():
         confFile[arg[0]]=arg[1]
     address=url='https://www.fflogs.com:443/v1/parses/character/%s/%s/%s?encounter=Titan&api_key=%s'%( confFile['character'], confFile['server'], confFile['region'], confFile['token'] )
     address = re.sub("\n",'',address) #Remove trailing \n spaces
-    print(address)
     r = requests.get(url=address)
-    print(r)
     return r.json()
     
 
