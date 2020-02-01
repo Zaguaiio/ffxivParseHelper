@@ -119,13 +119,6 @@ def execute(character, jobs, server, region, key):
 
     window=tkinter.Tk()
     window.title("Results")
-
-    
-
-    #print("ALL")
-    #
-
-
     
     console=("Courier",10)
     label = tkinter.Label(window, font=console, text = "ALL").grid(row=1)
@@ -135,11 +128,6 @@ def execute(character, jobs, server, region, key):
     label = tkinter.Label(window, font=console, text = "Lowest Overall").grid(row=5)
     label = tkinter.Label(window, font=console, text = str(printMinOverall(objList))).grid(row=6)
 
-    #print("\nLowest per fight")
-    #printMinPerFight(objList)
-
-    #print("\nLower Overall")
-    #printMinOverall(objList)
 
 def main():
 
