@@ -6,6 +6,7 @@ from character import *
 import time
 from prettytable import PrettyTable
 import re
+import tkinter.font as TkFont
 
 
 
@@ -31,7 +32,7 @@ def printAll(objList):
     table.field_names = ["Job", "Eden Prime", "Voidwalker", "Leviathan","Titan"]
     for each in objList:
         table.add_row( [ each.getJob(), each.getEs1() , each.getEs2() , each.getEs3() ,each.getEs4() ] )
-    print(table)
+    return table
 
 def printMinPerFight(objList):
     table = PrettyTable()
@@ -68,7 +69,7 @@ def printMinPerFight(objList):
     table.add_row( [ "Leviathan", lowestEs3.getJob(), lowestEs3.getEs3() ] )
     table.add_row( [ "Titan", lowestEs4.getJob(), lowestEs4.getEs4() ] )
 
-    print(table)
+    return table
 
 def printMinOverall(objList):
 
@@ -106,7 +107,7 @@ def printMinOverall(objList):
     if all(lowestEs3.getEs3() < val for val in [ lowestEs1.getEs1(), lowestEs2.getEs2(), lowestEs4.getEs4()] ) : table.add_row( [ "Leviathan", lowestEs3.getJob(), lowestEs3.getEs3()  ] )
     if all(lowestEs4.getEs4() < val for val in [ lowestEs1.getEs1(), lowestEs2.getEs2(), lowestEs3.getEs3()] ) : table.add_row( [ "Titan", lowestEs4.getJob(), lowestEs4.getEs4() ] )
 
-    print(table)
+    return table
 
 def execute(character, jobs, server, region, key):
     data = updateData(character, server, region, key)
@@ -116,14 +117,29 @@ def execute(character, jobs, server, region, key):
         if jobs[each].get() == 1:
             objList.append(Character(each, data))
 
-    print("ALL")
-    printAll(objList)
+    window=tkinter.Tk()
+    window.title("Results")
 
-    print("\nLowest per fight")
-    printMinPerFight(objList)
+    
 
-    print("\nLower Overall")
-    printMinOverall(objList)
+    #print("ALL")
+    #
+
+
+    
+    console=("Courier",10)
+    label = tkinter.Label(window, font=console, text = "ALL").grid(row=1)
+    label = tkinter.Label(window, font=console, text = str(printAll(objList))).grid(row=2)
+    label = tkinter.Label(window, font=console, text = "Lowest per fight").grid(row=3)
+    label = tkinter.Label(window, font=console, text = str(printMinPerFight(objList))).grid(row=4)
+    label = tkinter.Label(window, font=console, text = "Lowest Overall").grid(row=5)
+    label = tkinter.Label(window, font=console, text = str(printMinOverall(objList))).grid(row=6)
+
+    #print("\nLowest per fight")
+    #printMinPerFight(objList)
+
+    #print("\nLower Overall")
+    #printMinOverall(objList)
 
 def main():
 
